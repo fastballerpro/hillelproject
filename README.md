@@ -1,6 +1,14 @@
 # Simple Market FastAPI App
-in the /backend run: uv init,then:
-uv add "fastapi[standard]",in the 
-/backend/app run: uv run -m uvicorn main:app --reload and the app will run!
-For docker build run in the home directory: docker compose up --build and you're good to go!
- 
+
+## Run locally
+
+```bash
+cd /backend
+uv init
+uv add "fastapi[standard]"
+cd /backend/app
+uv run -m uvicorn main:app --reload
+
+# Docker Build
+docker compose up --build
+And you're good to go 🚀
