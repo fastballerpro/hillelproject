@@ -13,5 +13,5 @@ uv run -m uvicorn main:app --reload
 # if you want run in docker
 docker compose up
 
-# Docker Build
+# docker build
 docker compose up --build
