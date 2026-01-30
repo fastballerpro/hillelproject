@@ -15,4 +15,3 @@ docker compose up
 
 # Docker Build
 docker compose up --build
-And you're good to go 🚀
