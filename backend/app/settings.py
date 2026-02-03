@@ -19,4 +19,5 @@ class Settings(BaseSettings):
     DEBUG: bool = False
 
 
+
 settings = Settings()
