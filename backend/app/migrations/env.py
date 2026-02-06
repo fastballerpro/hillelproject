@@ -12,10 +12,10 @@ from alembic import context
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
-config.get_section_option(
+config.set_section_option(
     config.config_ini_section,
-    "sqlalchemy.url",
-    default=f'{settings.SQLALCHEMY_DATABASE_URI}?async_fallback=True'
+    'sqlalchemy.url',
+    f'{settings.DATABASE_URL}?async_fallback=True'
 )
 
 # Interpret the config file for Python logging.
@@ -26,7 +26,6 @@ if config.config_file_name is not None:
 # add your model's MetaData object here
 # for 'autogenerate' support
 # from myapp import mymodel
-# target_metadata = mymodel.Base.metadata
 target_metadata = Base.metadata
 
 # other values from the config, defined by the needs of env.py,

@@ -10,12 +10,11 @@ class DatabaseSettings(BaseSettings):
     PGPORT: int = 5432
 
     @property
-    def database_url(self) -> str:
-        return (f'postgresql+asyncpg://{self.PGUSER}:{self.PGPASSWORD}@{self.PGHOST}:{self.PGPORT}/{self.PGDATABASE}?'
-                f'sslmode=require&channel_binding=require')
+    def DATABASE_URL(self) -> str:
+        return (f'postgresql+asyncpg://{self.PGUSER}:{self.PGPASSWORD}@{self.PGHOST}:{self.PGPORT}/{self.PGDATABASE}')
 
 
-class Settings(BaseSettings):
+class Settings(DatabaseSettings):
     DEBUG: bool = False
 
 
