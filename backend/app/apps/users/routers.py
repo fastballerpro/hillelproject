@@ -10,5 +10,5 @@ users_router = APIRouter()
 
 @users_router.post('/create', status_code=status.HTTP_201_CREATED)
 async def create_user(user_register_data: RegisterUserSchema, session=Depends(get_session)) -> UserBaseFieldsSchemas:
-    user = await user_manager.create_user(user_register_data, session)
+    user = await user_manager.create_user(user_register_data=user_register_data, session=session)
     return user
