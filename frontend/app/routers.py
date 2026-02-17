@@ -13,5 +13,4 @@ async def index(requests: Request):
     }
     response = templates.TemplateResponse("pages/index.html", context)
 
-
     return response
