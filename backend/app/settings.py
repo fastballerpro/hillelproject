@@ -13,8 +13,11 @@ class DatabaseSettings(BaseSettings):
     def DATABASE_URL(self) -> str:
         return (f'postgresql+asyncpg://{self.PGUSER}:{self.PGPASSWORD}@{self.PGHOST}:{self.PGPORT}/{self.PGDATABASE}')
 
+class JWT(BaseSettings):
+    JWT_SECRET: str
+    JWT_ALGORITHM: str
 
-class Settings(DatabaseSettings):
+class Settings(DatabaseSettings, JWT):
     DEBUG: bool = False
 
 
