@@ -1,8 +1,16 @@
-<a
-        type="button"        class="btn btn-primary test-style"        href="{{ url_for('user_register') }}">
-    Sign Up
-</a>
-<a
-        type="button"        class="btn btn-primary"        href="{{ url_for('user_register') }}">
-    Login
-</a>
+{% if user %}
+
+    <a
+            type="button"        class="btn btn-primary"        href="{{ url_for('logout') }}">
+        {{ user.name }}, you can log out
+    </a>
+{% else %}
+    <a
+            type="button"        class="btn btn-primary  test-style"        href="{{ url_for('user_register') }}">
+        Sign uo
+    </a>
+    <a
+            type="button"        class="btn btn-primary"        href="{{ url_for('login') }}">
+        Login
+    </a>
+{% endif %}
