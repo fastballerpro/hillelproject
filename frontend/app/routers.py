@@ -84,3 +84,20 @@ async def user_register(requests: Request, username: str = Form(""), email: str 
             context['error'] = "Користувач з таким email вже існує"
             response = templates.TemplateResponse('pages/sign-up.html', context=context)
             return response
+
+@router.get("/logout")
+async def logout(requests: Request):
+    redirect_response = RedirectResponse(requests.url_for("index"), status_code=status.HTTP_303_SEE_OTHER)
+    redirect_response.delete_cookie('access_token')
+    return redirect_response
+
+@router.get("/login")
+@router.post("/login")
+async def login(requests: Request, username: str = Form(""), email: str = Form(""), password: str = Form("")):
+    context = {
+        'request': requests
+    }
+
+    if requests.method == "GET":
+        response = templates.TemplateResponse('pages/login.html', context=context)
+        return response
