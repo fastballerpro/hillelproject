@@ -4,6 +4,7 @@ from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 
 from apps.users.models import User, Note
+from apps.products.models import Product
 from apps.core.base_model import Base
 from settings import settings
 
