@@ -26,16 +26,55 @@ async def get_user(requests: Request) -> dict:
         return {}
 
 @router.get("/")
-async def index(requests: Request, user: dict = Depends(get_user)):
+async def index(requests: Request, user: dict = Depends(get_user), q: str = ''):
     context = {
         "user": user,
         'request': requests
     }
+
+    async with httpx.AsyncClient() as client_login:
+        headers = {
+            'accept': 'application/json',
+            'Content-Type': 'application/json',
+        }
+
+        response_products = await client_login.get('http://backend:8000/products/', headers=headers, params={"q": q})
+        if response_products.status_code == 200:
+            products = response_products.json()
+        else:
+            products = []
+
+    context["products"] = products
+
     response = templates.TemplateResponse('pages/index.html', context=context)
 
 
     return response
 
+@router.get("/{product_uuid}")
+async def product_detail(requests: Request, product_uuid: str,  user: dict = Depends(get_user)):
+    context = {
+        "user": user,
+        'request': requests
+    }
+
+    async with httpx.AsyncClient() as client_login:
+        headers = {
+            'accept': 'application/json',
+            'Content-Type': 'application/json',
+        }
+
+        response_products = await client_login.get(f'http://backend:8000/products/{product_uuid}', headers=headers)
+        if response_products.status_code == 200:
+            product =  response_products.json()
+        else:
+            product =  {}
+
+    context["product"] = product
+
+    response = templates.TemplateResponse('pages/product.html', context=context)
+
+    return response
 
 @router.get("/sign-up")
 @router.post("/sign-up")
