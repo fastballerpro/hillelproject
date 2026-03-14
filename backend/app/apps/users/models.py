@@ -14,3 +14,4 @@ class Note(Base):
     user_id: Mapped[int] = mapped_column(ForeignKey('users.id'))
     name: Mapped[str]
     content: Mapped[str]
+    image_url: Mapped[str | None] = mapped_column(nullable=True)

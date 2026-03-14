@@ -1,4 +1,7 @@
-.test-style {
-    color: yellow
+body {
+  background: #f8f9fa;
 }
- {color: black}
+
+.card {
+  border-radius: 0.75rem;
+}

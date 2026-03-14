@@ -41,6 +41,7 @@ class NoteResponseSchema(NoteCreateSchema):
     id: int
     user_id: int
     created_at: datetime  
+    image_url: str | None = None  
     
     model_config = ConfigDict(
         from_attributes=True,  

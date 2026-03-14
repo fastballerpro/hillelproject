@@ -28,7 +28,7 @@ class UserManager:
 
 
 class NoteManager:
-    async def create_note(self, session, note_data: NoteCreateSchema, user_id: int):
+    async def create_note(self, session, note_data: NoteCreateSchema, user_id: int, image_url: str | None = None):
         query = select(Note).filter(
             Note.user_id == user_id,
             Note.name == note_data.name
@@ -42,11 +42,11 @@ class NoteManager:
                 detail=f'Note with name "{note_data.name}" already exists for this user'
             )
 
-
         note = Note(
             name=note_data.name,
             content=note_data.content,
-            user_id=user_id
+            user_id=user_id,
+            image_url=image_url
         )
 
         session.add(note)
@@ -58,6 +58,14 @@ class NoteManager:
         query = select(Note).filter(Note.user_id == user_id)
         result = await session.execute(query)
         return result.scalars().all()
+
+    async def get_note(self, session, note_id: int, user_id: int):
+        query = select(Note).filter(
+            Note.id == note_id,
+            Note.user_id == user_id
+        )
+        result = await session.execute(query)
+        return result.scalar_one_or_none()
 
 
 
